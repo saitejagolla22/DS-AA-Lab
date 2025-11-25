@@ -92,7 +92,58 @@ class SinglyLinkedList {
         }
         return -1;
     }
+    
+    //reverse
+    void reverse() {
+        Node prev = null;
+        Node current = head;
+        Node next;
 
+        while (current != null) {
+            next = current.next;   // store next
+            current.next = prev;   // reverse link
+            prev = current;        // move prev forward
+            current = next;        // move current forward
+        }
+        head = prev;               // new head
+    }
+    
+    //sort
+    void sort() {
+        if (head == null) return;
+
+        boolean swapped;
+        do {
+            swapped = false;
+            Node current = head;
+            while (current.next != null) {
+                if (current.data > current.next.data) {
+                    // swap data
+                    int temp = current.data;
+                    current.data = current.next.data;
+                    current.next.data = temp;
+                    swapped = true;
+                }
+                current = current.next;
+            }
+        } while (swapped);
+    }
+    
+    // Remove duplicates from a sorted list
+    void removeDuplicates() {
+        if (head == null) return;
+
+        Node current = head;
+
+        while (current != null && current.next != null) {
+            if (current.data == current.next.data) {
+                // Skip the duplicate node
+                current.next = current.next.next;
+            } else {
+                current = current.next;
+            }
+        }
+    }
     // Display the list
     public void printList() {
         Node temp = head;
@@ -108,27 +159,46 @@ class SinglyLinkedList {
         SinglyLinkedList list = new SinglyLinkedList();
 
         // Insertions
-        list.insertAtEnd(10);
+        System.out.println("Inserting Data Elements:");
+        list.insertAtEnd(90);
         list.insertAtBeginning(20);
         list.insertAtEnd(30);
         list.insertAtBeginning(40);
-        list.insertAtPosition(1, 25); // Insert 25 at position 1
-        list.printList(); // Expected: 20 25 10 30
-
+        list.insertAtPosition(2, 90);
+        list.insertAtPosition(1, 25);
+        list.printList(); 
+        
         // Deletions
-        list.deleteAtBeginning(); // Removes 20
-        //System.out.println("list= ");
-        list.printList(); // Expected: 25 10 30
-        list.deleteAtEnd(); // Removes 30
-        list.printList(); // Expected: 25 10
-        list.deleteAtPosition(1); // Removes 10 (position 1)
-        list.printList(); // Expected: 25
+        System.out.println("Deletions Data Elements:");
+        list.deleteAtBeginning(); 
+        list.printList();
+        list.deleteAtEnd(); 
+        list.printList(); 
+        System.out.println("Deletion Data at Position:");
+        list.deleteAtPosition(1); 
+        list.printList(); 
 
         // Search operation
-        int pos = list.search(10); // Should be 0
+        System.out.println("Searching Opertion:");
+        int pos = list.search(20); // Should be 0
         if (pos != -1)
             System.out.println("Element found at position: " + pos);
         else
             System.out.println("Element not found");
+        
+        //Reversing operation
+        System.out.println("Reversing Data Elements:");
+        list.reverse();
+        list.printList();
+        
+        //Sorting operation
+        System.out.println("Sorting Data Elements:");
+        list.sort();
+        list.printList();
+        
+        //Removing duplicates in the list
+        System.out.println("Removing duplicates data elements:");
+        list.removeDuplicates();
+        list.printList();
     }
 }
