@@ -1,3 +1,9 @@
+// linked list--- creation
+// insertion
+// deletion 
+// searching
+// reverse
+// sort
 class SinglyLinkedList {
     // Node structure
     class Node {
