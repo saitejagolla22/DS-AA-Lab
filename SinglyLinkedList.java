@@ -167,10 +167,16 @@ class SinglyLinkedList {
         // Insertions
         System.out.println("Inserting Data Elements:");
         list.insertAtEnd(90);
+        list.printList();
         list.insertAtBeginning(20);
+        list.printList();
         list.insertAtEnd(30);
+        list.printList();
         list.insertAtBeginning(40);
+        list.printList();
+        System.out.println("Insertion at Position:");
         list.insertAtPosition(2, 90);
+        list.printList();
         list.insertAtPosition(1, 25);
         list.printList(); 
         
@@ -183,7 +189,7 @@ class SinglyLinkedList {
         System.out.println("Deletion Data at Position:");
         list.deleteAtPosition(1); 
         list.printList(); 
-
+       
         // Search operation
         System.out.println("Searching Opertion:");
         int pos = list.search(20); // Should be 0
@@ -191,7 +197,8 @@ class SinglyLinkedList {
             System.out.println("Element found at position: " + pos);
         else
             System.out.println("Element not found");
-        
+        System.out.println("Final list After insertion and deletion operaions:");
+        list.printList();
         //Reversing operation
         System.out.println("Reversing Data Elements:");
         list.reverse();
