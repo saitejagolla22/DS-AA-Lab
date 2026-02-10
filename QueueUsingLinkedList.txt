@@ -1,0 +1,73 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.*;
+class QueueUsingLinkedList{
+class Node{
+    int data;
+    Node next;
+    Node(int d){
+        data=d;
+        next=null;
+    }
+    }
+    Node front;
+    Node rear;
+    public void enQueue(int new_data){
+        Node newNode=new Node(new_data);
+        if(rear==null){
+            front=rear=newNode;
+            return;
+        }
+        rear.next=newNode;
+        rear=newNode;
+    }
+    public void deQueue(){
+        if(front==null){
+            return;
+        }
+        Node temp=front;
+        front=front.next;
+        if(front==null)
+        rear=null;
+    }
+    public void display(){
+        Node temp=front;
+        while(temp!=null){
+            System.out.println(temp.data+" ");
+            temp=temp.next;
+        }
+    }
+    public static void main(String[] args) {
+        QueueUsingLinkedList list=new QueueUsingLinkedList();
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Queue Operations:");
+        System.out.println("1.Insertion\n2.Deletion\n3.Enqueue\n4.Dequeue\n5.Display");
+        while(true){
+            int ch=sc.nextInt();
+            switch(ch){
+                case 1:
+                    System.out.println("Enter element to insert in Queue");
+                    list.enQueue(sc.nextInt());
+                    break;
+                case 2:
+                    list.deQueue();
+                    break;
+                case 3:
+                    System.out.println("First Element in the Queue:"+list.front.data);
+                    break;
+                case 4:
+                    System.out.println("Last Element in the Queue:"+list.rear.data);
+                    break;
+                case 5:
+                    System.out.println("Queue Elements:");
+                    list.display();
+                    break;
+                default:
+                    System.out.println("Choose Valid Option");
+                    break;
+            }
+        
+        
+        }//System.out.println("Try programiz.pro");
+    }
+}
