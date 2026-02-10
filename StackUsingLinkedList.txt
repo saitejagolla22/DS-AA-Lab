@@ -1,0 +1,85 @@
+import java.util.Scanner;  
+ 
+class Linkedlist {   
+    class Node {     
+        int data; 
+        Node next;
+        Node(int d){
+            data=d;
+            next=null;
+        }
+ } 
+  Node top;   
+  public void push(int new_data) {     
+      Node newNode = new Node(new_data);     
+      if (newNode == null) {       
+          System.out.print("\nHeap Overflow"); 
+          return; 
+    } 
+    newNode.data = new_data;     
+    newNode.next = top;     
+    top = newNode; 
+  } 
+  public boolean isEmpty() {     
+      return top == null; 
+  }   
+  public int peek() {     
+      if (!isEmpty()) {       
+          return top.data; 
+    } else { 
+      System.out.println("Stack is empty");       
+      return -1; 
+    } 
+  }   
+  public void pop() {     
+      if (top == null) { 
+      System.out.print("\nStack Underflow"); 
+      return;     
+          
+      }     
+      top = (top).next; 
+  } 
+  public void display() {     
+      if (top == null) { 
+      System.out.printf("\nStack Underflow"); 
+      return; 
+    } else { 
+      Node temp = top;       
+      while (temp != null) { 
+        System.out.printf("\nDisplay Stack");         
+        System.out.printf(" " + temp.data);         
+        temp = temp.next; 
+      } 
+    } 
+  } 
+public static void main(String[] args) { 
+    Scanner scan = new Scanner(System.in); 
+    Linkedlist obj = new Linkedlist();
+    System.out.print("\nStack using linked list Operations\n\n1. Push(Insert Element)\n2. Pop(Remove Top Element)\n3. Peek(Display Top element)\n4. Display Stack\n");
+     while(true) { 
+      int choice = scan.nextInt();       
+      switch (choice) {       
+        case 1: 
+            System.out.println("Enter Element to insert");         
+            obj.push(scan.nextInt());         
+            break;       
+        case 2: 
+            System.out.println("Before Removed Stack");         
+            obj.display(); 
+            System.out.println("\n\nAfter Removed Top element on the stack"); 
+            obj.pop();         
+            obj.display();         
+            break;       
+        case 3: 
+                System.out.printf("\nTop element is %d\n", obj.peek()); 
+                break;       
+        case 4:         
+            obj.display();         
+            break;       
+        default: 
+            System.out.println("Wrong Entry \n "); 
+            break; 
+      }
+  } 
+}
+}
