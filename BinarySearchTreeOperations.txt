@@ -1,0 +1,107 @@
+import java.util.*;
+public class BSTOperations {
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int value) {
+        data = value;
+        left = right = null;
+    }
+}
+Node root;
+
+    // ================= INSERT =================
+    // Recursive Insert
+   Node insertRecursive(Node root, int key) {
+        if (root == null) {
+            return new Node(key);
+        }
+        if (key < root.data)
+            root.left = insertRecursive(root.left, key);
+        else if (key > root.data)
+            root.right = insertRecursive(root.right, key);
+        return root;
+    }
+    // ================= SEARCH =================
+// Recursive Search
+    boolean searchRecursive(Node root, int key) {
+        if (root == null)
+            return false;
+        if (key == root.data)
+            return true;
+        else if (key < root.data)
+            return searchRecursive(root.left, key);
+        else
+            return searchRecursive(root.right, key);
+    }
+    // ================= DELETE (Recursive) =================
+    Node delete(Node root, int key) {
+        if (root == null)
+            return null;
+        if (key < root.data)
+            root.left = delete(root.left, key);
+        else if (key > root.data)
+            root.right = delete(root.right, key);
+        else {
+            // Node with one child or no child
+            if (root.left == null)
+                return root.right;
+            else if (root.right == null)
+                return root.left;
+            // Node with two children
+            root.data = minValue(root.right);
+            root.right = delete(root.right, root.data);
+        }
+        return root;
+    }
+    int minValue(Node root) {
+        while (root.left != null)
+            root = root.left;
+        return root.data;
+    }
+    // ================= TRAVERSALS =================
+    // Recursive Inorder
+    void inorderRecursive(Node root) {
+        if (root != null) {
+            inorderRecursive(root.left);
+            System.out.print(root.data + " ");
+            inorderRecursive(root.right);
+        }
+    }
+    // Recursive Preorder
+    void preorderRecursive(Node root) {
+        if (root != null) {
+            System.out.print(root.data + " ");
+            preorderRecursive(root.left);
+            preorderRecursive(root.right);
+        }
+    }
+    // Recursive Postorder
+    void postorderRecursive(Node root) {
+        if (root != null) {
+            postorderRecursive(root.left);
+            postorderRecursive(root.right);
+            System.out.print(root.data + " ");
+        }
+    }
+    // ================= MAIN METHOD =================
+
+    public static void main(String[] args) {
+        BSTOperations bst = new BSTOperations();
+        // Insert elements
+        int[] elements = {50, 30, 70, 20, 40, 60, 80};
+        for (int el : elements)
+            bst.root = bst.insertRecursive(bst.root, el);
+        System.out.println("Inorder (Recursive):");
+        bst.inorderRecursive(bst.root);
+        System.out.println("\nPreorder (Recursive):");
+        bst.preorderRecursive(bst.root);
+        System.out.println("\nPostorder (Recursive):");
+        bst.postorderRecursive(bst.root);
+        System.out.println("\nSearch 40 (Recursive): " + bst.searchRecursive(bst.root, 40));
+        bst.root = bst.delete(bst.root, 20);
+        System.out.println("\nAfter Deleting 20 (Inorder):");
+        bst.inorderRecursive(bst.root);
+    }
+}
