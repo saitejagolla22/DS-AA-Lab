@@ -13,7 +13,7 @@ class Linkedlist {
   public void push(int new_data) {     
       Node newNode = new Node(new_data);     
       if (newNode == null) {       
-          System.out.print("\nHeap Overflow"); 
+          System.out.print("\nStack Overflow"); 
           return; 
     } 
     newNode.data = new_data;     
@@ -82,4 +82,5 @@ public static void main(String[] args) {
       }
   } 
 }
+
 }
